@@ -22,7 +22,7 @@ class CurrencyConverter extends StatelessWidget {
       if (input.isNotEmpty) {
         try {
           double value = double.parse(input);
-          result = value * 1.2; // Example: Assume a conversion rate of 1.2
+          result = value * 132; // Example: Assume a conversion rate of 1.2
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Converted Amount: \$${result.toStringAsFixed(2)}')),
           );
