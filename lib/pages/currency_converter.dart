@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyConverter extends StatelessWidget {
@@ -6,19 +5,51 @@ class CurrencyConverter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double result = 0.0;
+    final TextEditingController textEditingController = TextEditingController();
+
     final border = OutlineInputBorder(
       borderSide: const BorderSide(
         width: 2.0,
         style: BorderStyle.solid,
-        color: Colors.black, // Ensure border color is defined
+        color: Colors.black,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(20)),
     );
 
+    void convertCurrency() {
+      String input = textEditingController.text;
+      if (input.isNotEmpty) {
+        try {
+          double value = double.parse(input);
+          result = value * 1.2; // Example: Assume a conversion rate of 1.2
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Converted Amount: \$${result.toStringAsFixed(2)}')),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Invalid input. Please enter a valid number.')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter a value to convert.')),
+        );
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+        title: const Text(
+          "BIG JA Currency Converter",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.red,
+      ),
       body: ColoredBox(
-        color: Colors.blue, // Define the color here
+        color: Colors.blue,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,18 +69,20 @@ class CurrencyConverter extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: textEditingController,
+                onSubmitted: (value) {
+                  print("Entered value: $value");
+                },
                 style: const TextStyle(
                   color: Colors.black,
                 ),
                 decoration: InputDecoration(
-                  hintText: "Please enter the amount to convert using BIG JA",
+                  hintText: "Enter the amount to convert using BIG JA",
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(255, 117, 106, 72),
                   ),
                   prefixIcon: const Icon(Icons.monetization_on),
                   prefixIconColor: Colors.amber,
-                  suffixIcon: const Icon(Icons.abc),
-                  suffixIconColor: Colors.lightBlue,
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: border,
@@ -60,17 +93,22 @@ class CurrencyConverter extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-                onPressed: () {
-                  if (kDebugMode) {
-                    print("Convert button pressed");
-                  }
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.green),
-                  fixedSize: WidgetStatePropertyAll(Size(double.infinity, 50)),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed: convertCurrency,
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(double.infinity, 50),
+                  padding: const EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
-                child: const Text("Convert")),
+                child: const Text("Convert"),
+              ),
+            ),
           ],
         ),
       ),
