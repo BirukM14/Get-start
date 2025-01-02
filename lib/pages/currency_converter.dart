@@ -109,7 +109,7 @@ class CurrencyConverter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: const Text("Convert"),
+                child: const Text("Converter button"),
               ),
             ),
           ],
