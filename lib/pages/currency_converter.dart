@@ -102,7 +102,7 @@ class CurrencyConverter extends StatelessWidget {
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
+                  foregroundColor: Colors.red,
                   minimumSize: const Size(double.infinity, 50),
                   padding: const EdgeInsets.all(10),
                   shape: RoundedRectangleBorder(
