@@ -42,7 +42,7 @@ class CurrencyConverter extends StatelessWidget {
       backgroundColor: Colors.blueGrey,
       appBar: AppBar(
         title: const Text(
-          "BIG JA Currency Converter",
+          "BIG JA Currency Converter to USD",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
