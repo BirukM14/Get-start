@@ -22,7 +22,7 @@ class CurrencyConverter extends StatelessWidget {
       if (input.isNotEmpty) {
         try {
           double value = double.parse(input);
-          result = value * 132; // Example: Assume a conversion rate of 1.2
+          result = value * 12; // Example: Assume a conversion rate of 1.2
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Converted Amount: \$${result.toStringAsFixed(2)}')),
           );
@@ -57,9 +57,9 @@ class CurrencyConverter extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(10),
               color: Colors.white,
-              child: const Text(
-                "BIG JA",
-                style: TextStyle(
+              child:  Text(
+                result.toString(),
+                style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
                   color: Colors.red,
@@ -96,7 +96,10 @@ class CurrencyConverter extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                onPressed: convertCurrency,
+                onPressed: (){
+                  convertCurrency();
+                  result = double.parse(textEditingController.text) * 132;
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
