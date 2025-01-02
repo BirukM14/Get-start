@@ -46,7 +46,7 @@ class CurrencyConverter extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blueGrey,
       ),
       body: ColoredBox(
         color: Colors.blue,
